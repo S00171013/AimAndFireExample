@@ -20,6 +20,8 @@ namespace Engines
         private CircularChasingEnemy[] chasers;
         private Game _gameOwnedBy;
 
+        Sentry sentry1;
+
         public ChaseAndFireEngine(Game game)
             {
                 // Chase engine remembers reference to the game
@@ -39,6 +41,16 @@ namespace Engines
                                         , p.position, 4));
 
             chasers = new CircularChasingEnemy[Utility.NextRandom(2,5)];
+
+            // Lab 8 Question: Add Sentry that fires projectiles at the player.
+            sentry1 = new Sentry(game, game.Content.Load<Texture2D>(@"Textures/CrossBow"), new Vector2(800, 800), 1);
+
+            // Load Projectile Image.
+            sentry1.loadProjectile(new Projectile(game, game.Content.Load<Texture2D>(@"Textures/Arrow"),
+                                        new Sprite(game, game.Content.Load<Texture2D>(@"Textures/explosion_strip8"), sentry1.position, 8),
+                                        sentry1.position, 1));
+
+
 
             for (int i = 0; i < chasers.Count(); i++)
                 {
