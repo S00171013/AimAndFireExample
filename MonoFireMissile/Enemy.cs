@@ -49,7 +49,7 @@ namespace AnimatedSprite
                         enemyState = ENEMYSTATE.DEAD;
                     break;
                 case ENEMYSTATE.DEAD:
-                    countDown = 100;
+                    countDown = 10;
                     Visible=false;
                     break;
             }

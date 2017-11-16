@@ -43,7 +43,7 @@ namespace Engines
             chasers = new CircularChasingEnemy[Utility.NextRandom(2,5)];
 
             // Lab 8 Question: Add Sentry that fires projectiles at the player.
-            sentry1 = new Sentry(game, game.Content.Load<Texture2D>(@"Textures/CrossBow"), new Vector2(800, 800), 1);
+            sentry1 = new Sentry(game, game.Content.Load<Texture2D>(@"Textures/CrossBow"), new Vector2(300, 300), 1);
 
             // Load Projectile Image.
             sentry1.loadProjectile(new Projectile(game, game.Content.Load<Texture2D>(@"Textures/Arrow"),
@@ -70,6 +70,10 @@ namespace Engines
         {
             
             p.Update(gameTime);
+
+            sentry1.Follow(p);
+            sentry1.Update(gameTime);
+
             foreach (CircularChasingEnemy chaser in chasers)
             {
                 if (p.MyProjectile.ProjectileState == Projectile.PROJECTILE_STATE.EXPOLODING && p.MyProjectile.collisionDetect(chaser))
@@ -89,7 +93,11 @@ namespace Engines
         {
             p.Draw(spriteBatch);
             foreach (CircularChasingEnemy chaser in chasers)
+            {
                 chaser.Draw(spriteBatch);
+            }
+
+            sentry1.Draw(spriteBatch);
         }
 
 

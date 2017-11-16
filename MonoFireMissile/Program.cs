@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoFireMissile
+namespace AnimatedSprite
 {
 #if WINDOWS || LINUX
     /// <summary>

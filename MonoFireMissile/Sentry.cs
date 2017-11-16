@@ -8,43 +8,53 @@ using System.Threading.Tasks;
 
 namespace AnimatedSprite 
 {
-    class Sentry : Sprite
+    class Sentry : RotatingSprite
     {
         protected Game myGame;
-        private Projectile myProjectile;
+        private Projectile enemyProjectile;
 
         float chaseRadius = 200;
-
-
 
         public Sentry(Game g, Texture2D texture, Vector2 userPosition, int framecount) : base(g, texture, userPosition, framecount)
         {
             myGame = g;
         }
 
-        public Projectile MyProjectile
+        public Projectile EnemyProjectile
         {
             get
             {
-                return myProjectile;
+                return enemyProjectile;
             }
 
             set
             {
-                myProjectile = value;
+                enemyProjectile = value;
             }
         }
 
         public void loadProjectile(Projectile r)
         {
-            MyProjectile = r;
+            EnemyProjectile = r;
         }
 
-        public void Shoot(PlayerWithWeapon p)
+
+        public override void Update(GameTime gametime)
         {
-            if(inChaseZone(p) && MyProjectile.ProjectileState == Projectile.PROJECTILE_STATE.STILL)
+            if(enemyProjectile!= null)
+                enemyProjectile.Update(gametime);
+            
+            base.Update(gametime);
+        }
+
+        public void Follow(PlayerWithWeapon p)
+        {
+            if(inChaseZone(p) == true)
             {
-                MyProjectile.fire(p.position);
+                this.angleOfRotation = TurnToFace(position,
+                                                p.position, angleOfRotation, 1f);
+                //EnemyProjectile.fire(p.position);
+
             }
         }
 
@@ -53,17 +63,23 @@ namespace AnimatedSprite
         {
             float distance = Math.Abs(Vector2.Distance(this.WorldOrigin, p.CentrePos));
             if (distance <= chaseRadius)
+            {
                 return true;
-            return false;
+            }
+
+            else
+            {
+                return false;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            if (MyProjectile != null && MyProjectile.ProjectileState != Projectile.PROJECTILE_STATE.STILL)
+            if (EnemyProjectile != null && EnemyProjectile.ProjectileState != Projectile.PROJECTILE_STATE.STILL)
             {
-                MyProjectile.Draw(spriteBatch);
-            }            
+                EnemyProjectile.Draw(spriteBatch);
+            }    
         }
 
     }

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using AnimatedSprite;
 using Engines;
 
-namespace MonoFireMissile
+namespace AnimatedSprite
 {
     /// <summary>
     /// This is the main type for your game.

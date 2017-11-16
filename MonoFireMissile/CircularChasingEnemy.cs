@@ -23,7 +23,7 @@ namespace AnimatedSprite
             this.Velocity = 2.0f;
         }
 
-        // folow a player if the player comes in the kill zone
+        // follow a player if the player comes in the kill zone
         public void follow(PlayerWithWeapon p)
         {
             if (inChaseZone(p) )

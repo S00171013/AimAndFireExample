@@ -90,9 +90,10 @@ namespace AnimatedSprite
                 base.Update(gametime);
             }
             public void fire(Vector2 SiteTarget)
-            {
-            projectileState = PROJECTILE_STATE.FIRING;
+            {         
+                projectileState = PROJECTILE_STATE.FIRING;
                 Target = SiteTarget;
+            
             }   
             public override void Draw(SpriteBatch spriteBatch)
             {
@@ -103,8 +104,6 @@ namespace AnimatedSprite
                 if (explosion.Visible)
                     explosion.Draw( spriteBatch);
                 
-
             }
-
     }
 }
