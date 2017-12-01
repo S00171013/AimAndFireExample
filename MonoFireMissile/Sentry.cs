@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnimatedSprite 
+namespace AnimatedSprite
 {
     class Sentry : RotatingSprite
     {
@@ -41,15 +41,15 @@ namespace AnimatedSprite
 
         public override void Update(GameTime gametime)
         {
-            if(enemyProjectile!= null)
+            if (enemyProjectile != null)
                 enemyProjectile.Update(gametime);
-            
+
             base.Update(gametime);
         }
 
         public void Follow(PlayerWithWeapon p)
         {
-            if(inChaseZone(p) == true)
+            if (inChaseZone(p) == true)
             {
                 this.angleOfRotation = TurnToFace(position,
                                                 p.position, angleOfRotation, 1f);
@@ -79,8 +79,7 @@ namespace AnimatedSprite
             if (EnemyProjectile != null && EnemyProjectile.ProjectileState != Projectile.PROJECTILE_STATE.STILL)
             {
                 EnemyProjectile.Draw(spriteBatch);
-            }    
+            }
         }
-
     }
 }
